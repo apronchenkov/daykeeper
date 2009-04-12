@@ -1,0 +1,130 @@
+% 2009-01-14
+% 2009-01-11
+% 2009-01-10
+
+\documentclass[a4paper,10pt]{article}
+
+%%
+% Пакет позволяющий определить, что используется: latex или pdflatex?
+%%
+\usepackage{ifpdf}
+
+%%
+% Пакеты AMS*
+%%
+\usepackage{amsfonts, amsmath, amsthm}
+
+%%
+% Определяем, используется ли XeTex?
+%%
+\ifx\XeTeXversion\undefined
+  %%
+  % Набор пакетов для работы с графическими файлами
+  %%
+  \ifpdf
+    \usepackage[pdftex]{graphicx}
+    \usepackage{cmap}
+  \else
+    \usepackage{graphicx}
+  \fi
+
+  \usepackage[utf8x]{inputenc} 
+
+\else
+  %%
+  % Набор пакетов для поддержки русского языка в XeLaTeX
+  %%
+  \usepackage[cm-default]{fontspec}
+  \usepackage{xunicode}
+  \usepackage{xecyr}
+
+  % Setting default fonts
+  \usepackage{unicode-math}
+  \setmainfont[Mapping=tex-text]{Cambria}
+  \setmathfont{Cambria Math}
+  
+  %\setmainfont{Times New Roman} 
+  %\setmainfont{Georgia}
+  %\setmainfont{Lucida Console}
+\fi
+
+%%
+% Дополнительные настройки
+%%
+\usepackage[english,russian]{babel} 
+\usepackage{indentfirst}
+
+
+\newcommand{\exercize}[1]{\textbf{#1.}}
+\newcommand{\abs}[1]{\lvert{}#1{}\rvert}
+
+%%
+% Начало документа
+%%
+\begin{document}
+
+\section{Домашнее задание}
+
+\exercize{1069} \[ x = a t^2,\ y = b t^3;\ \frac{d^2 x}{{dy}^2} = ? \]
+
+\exercize{1070} \[ x = a \cos{t},\ y = a \sin{t};\ \frac{d^2 x}{{dy}^2} = ? \]
+
+В задачах 1324 -- 1364 найти пределы.
+
+\exercize{1325} \[ \lim_{x \rightarrow 0} {\frac{\ln{\cos{x}}}{x}}. \]
+
+\exercize{1334} \[ \lim_{x \rightarrow 0} {\frac{e^{x^2} - 1}{\cos{x} - 1}}. \]
+
+\exercize{1344} \[ \lim_{x \rightarrow 0} {\frac{\ln{x}}{\ln{\sin{X}}}}. \]
+
+\exercize{1358} \[ \lim_{x \rightarrow 0} {x^{\sin{x}}}. \]
+
+\exercize{1363} \[ \lim_{x \rightarrow 0} {\left( 1 + \frac{1}{x^2} \right)^x}. \]
+
+
+\section{Работа на занятии}
+
+\exercize{1108} Исходя непосредственно из определения возрастающей и убывающей функции и точек максимума и минимума, показать, что функция 
+\[ y = x^3 - 3 x + 2 \]
+возрастает в точке $x_1 = 2,$ убывает в точке $x_2 = 0,$ достигает масимума в точке $x_3 = -1$ и минимума в точке $x_4 = 1$.
+
+\exercize{1109} Так же, как в задаче 1108, показать, что функция 
+\[ y = \cos{2 x} \]
+возрастает в точке $x_1 = 3 \pi / 4,$ убывает в точке $x_2 = \pi / 6,$ достигает максимума в точке $x_3 = 0$ и минимума в точке $x_4 = \pi / 2.$
+
+В задачах 1165 -- 1184 найти экстремумы функций.
+
+\exercize{1176} \[ y = x - \ln{(1 + x^2)}. \]
+
+\exercize{1179} \[ y = \frac{1}{2}(x^2 + 1) \arctg{x} - \frac{\pi}{8}x^2 - \frac{x - 1}{2}. \]
+
+
+В задачах 1185 -- 1197 найти наибольшие и наименьшие значения данных функций на указанных отрезках и в указанных интервалах.
+
+\exercize{1197} \[ y = \arctg{\frac{1 - x}{1 + x}},\ (0 \le x \le 1). \]
+
+В задачах 1198 -- 1207 доказать справедливость неравенств.
+
+\exercize{1199} \[ e^x > 1 + x,\ (x \not= 0). \]
+
+\exercize{1200} \[ x > \ln{(1 + x)},\ (x > 0). \]
+
+\exercize{1203} \[ 1 + x \ln{(x + \sqrt{1 + x^2})} \ge \sqrt{1 + x^2}. \]
+
+В задачах 1398 -- 1464 провести полное исследование данных функций и начертить их графики.
+
+\exercize{1398} \[ y = \frac{x}{1 + x^2}. \]
+
+\exercize{1402} \[ y = \frac{x^2}{x^2 - 1}. \]
+
+\exercize{1412} \[ y = \frac{(x - 1)^2}{(x + 1)^3}. \]
+
+\exercize{1416} \[ y = \frac{x}{e^x}. \]
+
+\exercize{1417} \[ y = x^2 e^{-x}. \]
+
+\exercize{1425} \[ y = x + \frac{\ln{x}}{x}. \]
+
+\exercize{1252, 1253}
+
+\end{document}

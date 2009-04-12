@@ -1,0 +1,166 @@
+% 2009-01-14
+% 2009-01-11
+% 2009-01-10
+
+\documentclass[a4paper,10pt]{article}
+
+%%
+% Пакет позволяющий определить, что используется: latex или pdflatex?
+%%
+\usepackage{ifpdf}
+
+%%
+% Пакеты AMS*
+%%
+\usepackage{amsfonts, amsmath, amsthm}
+
+%%
+% Определяем, используется ли XeTex?
+%%
+\ifx\XeTeXversion\undefined
+  %%
+  % Набор пакетов для работы с графическими файлами
+  %%
+  \ifpdf
+    \usepackage[pdftex]{graphicx}
+    \usepackage{cmap}
+  \else
+    \usepackage{graphicx}
+  \fi
+
+  \usepackage[utf8x]{inputenc} 
+
+\else
+  %%
+  % Набор пакетов для поддержки русского языка в XeLaTeX
+  %%
+  \usepackage[cm-default]{fontspec}
+  \usepackage{xunicode}
+  \usepackage{xecyr}
+
+  % Setting default fonts
+  \usepackage{unicode-math}
+  \setmainfont[Mapping=tex-text]{Cambria}
+  \setmathfont{Cambria Math}
+  
+  %\setmainfont{Times New Roman} 
+  %\setmainfont{Georgia}
+  %\setmainfont{Lucida Console}
+\fi
+
+%%
+% Дополнительные настройки
+%%
+\usepackage[english,russian]{babel} 
+\usepackage{indentfirst}
+
+
+\newcommand{\exercize}[1]{\textbf{#1.}}
+\newcommand{\abs}[1]{\lvert{}#1{}\rvert}
+\newcommand{\HRule}{\rule{\linewidth}{0.1mm}}
+
+%%
+% Начало документа
+%%
+\begin{document}
+
+\HRule
+\section{Вариант}
+% \exercize{293}
+1. Найти предел
+\[ \lim_{x \rightarrow 0}{\frac{\sqrt{1 + x^2} - 1}{x}}. \]
+
+% \exercize{498}
+2. Продифференцировать функцию:
+\[ (x - a)(x - b)(x - c)(x - d). \]
+
+% \exercize{796}
+3. Найти производную функции $y,$ заданной неявно: $ y^3 - 3y + 2 a x = 0. $
+
+% \exercize{204}
+4. Доказать, что функция: 
+\[ y = \frac{x^2}{1 + x^4} \]
+--- ограничена на всей числовой оси.
+
+\HRule
+
+\section{Вариант}
+% \exercize{294}
+1. Найти предел
+\[ \lim_{x \rightarrow 0}{\frac{\sqrt{1 + x} - 1}{x^2}}. \]
+
+% \exercize{553}
+2. Продифференцировать функцию: 
+\[ x \sin{x} \arctg{x}. \]
+
+% \exercize{798}
+3. Найти производную функции $y,$ заданной неявно: $ x^4 + y^4 = x^2 y^2. $
+
+% \exercize{1107} 
+4. Показать, что точка $x = 0$ есть точка минимума функции
+\[ y = 3 x^4 - 4 x^3 + 12 x^2 + 1. \]
+
+\HRule
+
+
+\section{Вариант} 
+% \exercize{302} 
+1. Найти предел
+\[ \lim_{x \rightarrow 1}{\frac{\sqrt[n]{x} - 1}{\sqrt[m]{x} - 1}}, \quad \textrm{($n$ и $m$ --- целые числа).} \]
+
+% \exercize{612}
+2. Продифференцировать функцию:
+\[ (x^2 - 2x + 3) e^x. \]
+
+% \exercize{805}
+3. Найти производную функции $y,$ заданной неявно: $ y = \cos{(x + y)}. $
+
+% \exercize{1317}
+4. Найти точки перегиба линии
+\[ x = e^t, y = \sin{t}. \]
+
+\HRule
+\newpage
+\HRule
+
+\section{Вариант} 
+
+% \exercize{361}
+1. Найти предел
+\[ \lim_{x \rightarrow \pm \infty}{\left(1 + \frac{1}{x}\right)^{x^2}}. \]
+
+% \exercize{692}
+2. Продифференцировать функцию:
+\[ \arcsin{(n \sin{x})}. \]
+
+% \exercize{1062}
+3. Найти вторую производную функции $y,$ заданной неявно: $ e^{x + y} = x y. $
+
+% \exercize{1316}
+4. Найти точки перегиба линии 
+\[ x = t^2, \quad y = 3t + t^3. \]
+
+\HRule
+
+\section{Вариант} 
+
+% \exercize{1346}
+1. Найти предел
+\[ \lim_{x \rightarrow + \infty}{x^n e^{-x}}. \]
+
+% \exercize{752}
+2. Продифференцировать функцию:
+\[ \ln{(x \sin{x} \sqrt{1 - x^2})}. \]
+
+% \exercize{944}
+3. Найти производную $y$ по $x:$ 
+\[ x = e^t \sin{t}, \quad y = e^t \cos{t}. \]
+
+% \exercize{1307}
+4. При каких значениях параметра $a$ график функции
+\[ y = e^x + a x^3 \]
+имеет точки перегиба?
+
+\HRule
+
+\end{document}

@@ -1,0 +1,131 @@
+% 2009-01-11
+
+\documentclass[draft]{article}
+%%
+% Пакет позволяющий определить, что используется: latex или pdflatex?
+%%
+\usepackage{ifpdf}
+
+%%
+% Пакеты AMS*
+%%
+\usepackage{amsfonts, amsmath, amsthm}
+
+%%
+% Определяем, используется ли XeTex?
+%%
+\ifx\XeTeXversion\undefined
+  %%
+  % Набор пакетов для работы с графическими файлами
+  %%
+  \ifpdf
+    \usepackage[pdftex]{graphicx}
+    \usepackage{cmap}
+  \else
+    \usepackage{graphicx}
+  \fi
+
+  \usepackage[utf8x]{inputenc} 
+
+\else
+  %%
+  % Набор пакетов для поддержки русского языка в XeLaTeX
+  %%
+  \usepackage[cm-default]{fontspec}
+  \usepackage{xunicode}
+  \usepackage{xecyr}
+
+  % Setting default fonts
+  \usepackage{unicode-math}
+  \setmainfont[Mapping=tex-text]{Cambria}
+  \setmathfont{Cambria Math}
+  
+  %\setmainfont{Times New Roman} 
+  %\setmainfont{Georgia}
+  %\setmainfont{Lucida Console}
+\fi
+
+%%
+% Дополнительные настройки
+%%
+\usepackage[english,russian]{babel} 
+\usepackage{indentfirst}
+
+\newtheorem{define}{Определение}
+\newtheorem{theorem}{Теорема}
+\newtheorem{lemma}{Лемма}
+\newtheorem{remark}{Замечание}
+
+\newcommand{\abs}[1]{\lvert{}#1{}\rvert}
+\newcommand{\Abs}[1]{\lVert{}#1{}\rVert}
+\newcommand{\ak}[1][k]{\alpha^{(#1)}}
+\newcommand{\minak}[1][k]{\underline{\alpha}^{(#1)}}
+\newcommand{\maxak}[1][k]{\overline{\alpha}^{(#1)}}
+\newcommand{\mk}[1][k]{m^{(#1)}}
+\newcommand{\Mk}[1][k]{M^{(#1)}}
+\newcommand{\tk}[1][k]{t^{(#1)}}
+\newcommand{\Tk}[1][k]{T^{(#1)}}
+
+\title{Заметки по задаче с acm.timus.ru \hbox {1560. Elementary symmetric functions}}
+
+%%
+% Начало документа
+%%
+\begin{document}
+\maketitle
+
+\section{Условие}
+\Eng
+{\it Time limit: 4.0 seconds}\newline
+{\it Memory limit: 64 MB}
+
+In this task, you are to read an array of integer numbers ($A[1 \ldots N]$) and a sequence of M queries of two types:
+\begin{itemize}
+  \item {Increase A[i] by D.}
+  \item {Calculate first $K + 1$ elementary symmetric polynomials of the numbers of the interval $[L \ldots R]$ ($S(0), S(1), S(2), \ldots, S(K))$.}
+\end{itemize}
+
+Elementary symmetric polynomials of the interval $[L..R]$ are given by:
+\[ S(k) = \sum_{L \le I_1 < I_2 < \ldots < I_k \le R} {A[I_1] A[I_2] \ldots A[I_k]} \]
+
+You should compute their values modulo prime P.
+
+\subsection{Input}
+
+The first line consists of three integer numbers: $N$ (size of the array), $M$ (number of queries) and $P$ (prime number) ($1 \le N \le 80000$; $1 \le M \le 100000$; $1000 \le P \le 10^9$ (prime)). 
+
+The second line contains $N$ integer numbers not exceeding $10^5$ by absolute value (the initial values in the array).
+
+The next $M$ lines contain queries. Each query can be either increase or calculation query.
+\begin{itemize}
+\item {{\bf I index delta} --- increase index-th value by delta ($1 \le index \le N$; $-10^5 \le delta \le 10^5$).}
+\item {{\bf C left right K} --- compute $S(0),\ldots,S(K)$ for the interval $[left \ldots right]$ ($1 \le left \le right \le N$; $1 \le K \le 4$; $K \le right - left + 1$).} 
+\end{itemize}
+
+All fields in each line are separated by spaces. 
+
+\subsection{Output}
+
+For each calculation query print a line consisting of $K + 1$ numbers:
+\[ S(0) \; S(1) \; \ldots \; S(K). \]
+These numbers must be nonnegative and less than $P$.
+
+\Rus
+
+\section{О симметричных многочленах} 
+
+\begin{align*}
+\sigma_1 & = \sum_{i} {x_i} \\
+\sigma_2 & = \sum_{i_1 < i_1} {x_{i_1} x_{i_2}} = (\sigma_1 \sum_{i} {x_i} - \sum_{i} {x_i^2}) / 2 \\
+\sigma_3 & = \sum_{i_1 < i_2 < i_3} { x_{i_1} x_{i_2} x_{i_3} } = (\sigma_2 \sum_{i} {x_i} - \sigma_1 \sum_{i} {x_i^2} + \sum_{i} {x_i^3}) / 3 \\
+\sigma_4 & = \sum_{i_1 < i_2 < i_3 < i_4} { x_{i_1} x_{i_2} x_{i_3} x_{i_4} } = (\sigma_3 \sum_{i} {x_i} - \sigma_2 \sum_{i} {x_i^2} + \sigma_1 \sum_{i} {x_i^3} - \sum_{i} {x_i^4}) / 4 \\
+\ldots\\
+\end{align*}
+
+\subsection{О реализации}
+
+Как теперь не трудно увидеть, для вычисления симметричных многочленов достаточно знать $\sum_{i} {x_i}, \sum_{i} {x_i^2}, \sum_{i} {x_i^3}, \ldots$
+
+Для решения приведённой задачи {\it 1560} удобно использовать серию из четырёх сумматоров.
+
+\end{document}
