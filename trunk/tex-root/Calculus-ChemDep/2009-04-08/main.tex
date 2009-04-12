@@ -1,0 +1,155 @@
+% 2009-01-14
+% 2009-01-11
+% 2009-01-10
+
+\documentclass[a4paper,10pt]{article}
+
+%%
+% Пакет позволяющий определить, что используется: latex или pdflatex?
+%%
+\usepackage{ifpdf}
+
+%%
+% Пакеты AMS*
+%%
+\usepackage{amsfonts, amsmath, amsthm}
+
+%%
+% Определяем, используется ли XeTex?
+%%
+\ifx\XeTeXversion\undefined
+  %%
+  % Набор пакетов для работы с графическими файлами
+  %%
+  \ifpdf
+    \usepackage[pdftex]{graphicx}
+    \usepackage{cmap}
+  \else
+    \usepackage{graphicx}
+  \fi
+
+  \usepackage[utf8x]{inputenc} 
+
+\else
+  %%
+  % Набор пакетов для поддержки русского языка в XeLaTeX
+  %%
+  \usepackage[cm-default]{fontspec}
+  \usepackage{xunicode}
+  \usepackage{xecyr}
+
+  % Setting default fonts
+  \usepackage{unicode-math}
+  \setmainfont[Mapping=tex-text]{Cambria}
+  \setmathfont{Cambria Math}
+  
+  %\setmainfont{Times New Roman} 
+  %\setmainfont{Georgia}
+  %\setmainfont{Lucida Console}
+\fi
+
+%%
+% Дополнительные настройки
+%%
+\usepackage[english,russian]{babel} 
+\usepackage{indentfirst}
+
+
+\newcommand{\exercize}[1]{\textbf{#1.}}
+\newcommand{\abs}[1]{\lvert{}#1{}\rvert}
+
+%%
+% Начало документа
+%%
+\begin{document}
+
+\section{Работа на занятии}
+
+В задачах 1676-1702, воспользовавшись основной таблицей интегралов и простейшими правилами интегрирования, найти интегралы.
+
+\exercize{1676} \[ \int{\sqrt{x}dx.} \]
+
+\exercize{1678} \[ \int{\frac{dx}{x^2}.} \]
+
+\exercize{1679} \[ \int{10^x dx.} \]
+
+\exercize{1680} \[ \int{a^x e^x dx.} \]
+
+\exercize{1683} \[ \int{3.4 x^{-0.17} dx.} \]
+
+\exercize{1684} \[ \int{(1 - 2 u) du.} \]
+
+\exercize{1688} \[ \int{\left(\frac{1 - z}{z}\right)^2 dz.} \]
+
+\exercize{1696} \[ \int{ \tg^2{x} dx.} \]
+
+\exercize{1702} \[ \int{ (\arcsin{x} + arccos{x}) dx.} \]
+
+В задачах 1703-1780 найти интегралы, воспользовавшись теоремой об инвариантности формул интегрирования.
+
+\exercize{1706} \[ \int{(x + 1)^{15} dx.} \]
+
+\exercize{1707} \[ \int{\frac{dx}{(2x - 3)^5}.} \]
+
+\exercize{1710} \[ \int{\sqrt{8 - 2 x} dx.} \]
+
+\exercize{1713} \[ \int{x \sqrt{1 - x^2} dx.} \]
+
+\exercize{1714} \[ \int{x^2 \sqrt[5]{x^3 + 2} dx.} \]
+
+\exercize{1715} \[ \int{\frac{x dx}{\sqrt{x^2 + 1}}.} \]
+
+\exercize{1719} \[ \int{\sin^3{x} \cos{x} dx.} \]
+
+\exercize{1720} \[ \int{\frac{\sin{x} dx}{\cos^2{x}}.} \]
+
+\exercize{1722} \[ \int{\cos^3{x} \sin{2 x} dx.} \]
+
+\exercize{1729} \[ \int{\cos{3x} dx.} \]
+
+\exercize{1734} \[ \int{e^x \sin{(e^x)} dx.} \]
+
+\exercize{1737} \[ \int{\frac{(2x - 3) dx}{x^2 - 3 x + 8}.} \]
+
+\exercize{1744} \[ \int{\tg{x} dx.} \]
+
+\exercize{1749} \[ \int{\frac{dx}{x \ln{x}}.} \]
+
+\exercize{1752} \[ \int{e^{\sin{x}} \cos{x} dx.} \]
+
+\exercize{1756} \[ \int{e^{x^2} x dx.} \]
+
+\exercize{1760} \[ \int{\frac{dx}{1 + 9 x^2}.} \]
+
+
+В задачах 1781-1790 найти интегралы, выделив целую часть подынтегральной дроби.
+
+\exercize{1783} \[ \int{\frac{A x}{a + b x} dx.} \]
+
+
+\section{Домашнее задание}
+
+В задачах 1676-1702, воспользовавшись основной таблицей интегралов и простейшими правилами интегрирования, найти интегралы.
+
+\exercize{1677} \[ \int{\sqrt{m}{x^n}dx.} \]
+
+\exercize{1685} \[ \int{(\sqrt{x} + 1)(x - \sqrt{x} + 1) dx.} \]
+
+В задачах 1703-1780 найти интегралы, воспользовавшись теоремой об инвариантности формул интегрирования.
+
+\exercize{1708} \[ \int{\frac{dx}{(a + bx)^c}.} \]
+
+\exercize{1712} \[ \int{2 x \sqrt{x^2 + 1} dx.} \]
+
+\exercize{1716} \[ \int{\frac{x^4 dx}{\sqrt{4 + x^5}}.} \]
+
+\exercize{1721} \[ \int{\frac{\cos{x} dx}{\sqrt[3]{\sin^2{x}}}.} \]
+
+\exercize{1723} \[ \int{\frac{\sqrt{\ln{x}}}{x} dx.} \]
+
+\exercize{1731} \[ \int{\sin{(2x - 3)}dx.} \]
+
+\exercize{1760} \[ \int{\frac{dx}{1 + 9 x^2}.} \]
+
+
+\end{document}

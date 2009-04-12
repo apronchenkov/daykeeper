@@ -1,0 +1,342 @@
+% 2009-01-14
+% 2009-01-11
+% 2009-01-10
+
+\documentclass{article}
+%%
+% Пакет позволяющий определить, что используется: latex или pdflatex?
+%%
+\usepackage{ifpdf}
+
+%%
+% Пакеты AMS*
+%%
+\usepackage{amsfonts, amsmath, amsthm}
+
+%%
+% Определяем, используется ли XeTex?
+%%
+\ifx\XeTeXversion\undefined
+  %%
+  % Набор пакетов для работы с графическими файлами
+  %%
+  \ifpdf
+    \usepackage[pdftex]{graphicx}
+    \usepackage{cmap}
+  \else
+    \usepackage{graphicx}
+  \fi
+
+  \usepackage[utf8x]{inputenc} 
+
+\else
+  %%
+  % Набор пакетов для поддержки русского языка в XeLaTeX
+  %%
+  \usepackage[cm-default]{fontspec}
+  \usepackage{xunicode}
+  \usepackage{xecyr}
+
+  % Setting default fonts
+  \usepackage{unicode-math}
+  \setmainfont[Mapping=tex-text]{Cambria}
+  \setmathfont{Cambria Math}
+  
+  %\setmainfont{Times New Roman} 
+  %\setmainfont{Georgia}
+  %\setmainfont{Lucida Console}
+\fi
+
+%%
+% Дополнительные настройки
+%%
+\usepackage[english,russian]{babel} 
+\usepackage{indentfirst}
+
+\newtheorem{define}{Определение}
+\newtheorem{theorem}{Теорема}
+\newtheorem{lemma}{Лемма}
+\newtheorem{remark}{Замечание}
+
+\newcommand{\abs}[1]{\lvert{}#1{}\rvert}
+\newcommand{\Abs}[1]{\lVert{}#1{}\rVert}
+\newcommand{\ak}[1][k]{\alpha^{(#1)}}
+\newcommand{\minak}[1][k]{\underline{\alpha}^{(#1)}}
+\newcommand{\maxak}[1][k]{\overline{\alpha}^{(#1)}}
+\newcommand{\mk}[1][k]{m^{(#1)}}
+\newcommand{\Mk}[1][k]{M^{(#1)}}
+\newcommand{\tk}[1][k]{t^{(#1)}}
+\newcommand{\Tk}[1][k]{T^{(#1)}}
+
+%%
+% Начало документа
+%%
+\begin{document}
+
+\section{Постановка задачи}
+
+Введём вспомогательные обозначения. Пусть $A = \left( a_{ij} \right)_{n \times m}$ — произвольная матрица, $S$ —
+ произвольное множество, тогда
+\[
+  A_{i*} = \{ a_{i1},\ a_{i2},\ \ldots,\ a_{im} \} , \\
+\]
+\[
+  A_{*j} = \{ a_{1j},\ a_{2j},\ \ldots,\ a_{nj} \} , \\
+\]
+\[
+  \Abs{S} = \sum_{s \in S}{s}.
+\]
+
+Даны последовательности матриц $\left\{ \Mk \right\}$ и $\left\{ \Tk \right\}$;
+\[ \Mk = \left( \mk_{ij} \right)_{n\times{}n}, \]
+
+\begin{displaymath}
+  \ak_{i} = \left\{
+  \begin{array}{cl}
+    1, & \quad \text{если} \ i = n - 1 \\
+    \frac{\Abs{\Mk_{*i}}}{\Abs{\Mk_{i*}}}, & \quad \text{если} \ i \not= n - 1 \\
+  \end{array}
+  \right. ,
+\end{displaymath}
+
+\begin{displaymath}
+  \Tk = \left(
+  \begin{array}{cccc}
+     \ak_1 &      0 & \ldots &      0 \\
+         0 &  \ak_2 & \ldots &      0 \\
+    \vdots & \vdots & \ddots & \vdots \\
+         0 &      0 & \ldots &  \ak_n \\
+  \end{array}
+  \right)
+\end{displaymath}
+
+Последовательность $\Mk$ определяется начальной матрицей $\Mk[0]$ и правилом перехода:
+\[ \Mk[k + 1] = \Tk \Mk. \]
+
+Сформулируем задачу. Пусть $\Mk[0]$ — положительно определённая матрица. Необходимо показать, что $\Tk \rightarrow E$ при $k \rightarrow +\infty$.
+
+
+\section{Начальные условия}
+
+\begin{define}
+Матрица $A$ {\it называется положительно определённой,} если для любого ненулевого вектора-строки $x$ справедливо $x A x^T > 0.$
+\end{define}
+
+Например следующая матрица положительно определённая:  
+\begin{displaymath}
+  A = \left(
+  \begin{array}{ccc}
+      1 & 0 & -1 \\
+      0 & 1 &  0 \\
+      0 & 0 &  1 \\
+  \end{array}
+  \right).
+\end{displaymath}
+
+\begin{remark}
+  \label{remark:row_sum_zero}
+  Если у матрицы $\Mk$ есть строка, сумма элементов которой равна нулю, то к такой матрице невозможно применить правило перехода — возникает деление на ноль.
+\end{remark}
+
+\begin{remark}
+  \label{remark:col_sum_zero}
+  Если у матрицы $\Mk$ есть столбец, сумма элементов которого равна нулю, то у матрицы $\Mk[k + 1]$ имеется нулевая строка.
+\end{remark}
+
+Согласно замечаниям \ref{remark:row_sum_zero} и \ref{remark:col_sum_zero} положительной определённости для начальных условий не достаточно. Существуют примеры в которых последовательность оказывается конечной.
+
+Введём дополнительное ограничение: пусть $\Abs{\Mk[0]_{i*}} \not= 0$ и $\Abs{\Mk[0]_{*j}} \not= 0$ для всех $i, j \in \left\{ 1, 2, \ldots, n \right\}.$
+
+Рассмотрим пример:
+\begin{gather*}
+  \Mk[0] = \left(
+  \begin{array}{ccc}
+      1 & 0 & -2 \\
+      0 & 1 &  0 \\
+      0 & 0 &  3 \\
+  \end{array}
+  \right), \\
+  \Mk[1] = \left(
+  \begin{array}{ccc}
+     -1 & 0 &  2 \\
+      0 & 1 &  0 \\
+      0 & 0 &  1 \\
+  \end{array}
+  \right), \\
+  \Mk[2] = \left(
+  \begin{array}{ccc}
+      1 & 0 & -2 \\
+      0 & 1 &  0 \\
+      0 & 0 &  3 \\
+  \end{array}
+  \right), \\
+  \ldots
+\end{gather*}
+В этой последовательности начальная матрица положительно определённая, и сумма элементов любой её строки (столбца) не ноль.
+Последовательность не имеет предела, так как у неё есть период. Это произошло из-за отрицательной суммы элементов первой строки.
+
+Ещё один пример:
+\begin{gather*}
+  \Mk[0] = \left(
+  \begin{array}{ccc}
+     1 &            0 & -\frac{1}{2} \\
+     0 &            1 &            0 \\
+     0 & -\frac{1}{2} &            1 \\
+  \end{array}
+  \right), \\
+  \Mk[1] = \left(
+  \begin{array}{ccc}
+     2 &            0 & -1 \\
+     0 &            1 &  0 \\
+     0 & -\frac{1}{2} &  1 \\
+  \end{array}
+  \right).
+\end{gather*}
+Начальная матрица вновь положительно определённая. В этом примере у матрицы $\Mk[1]$ сумма элементов в последнем столбце равна нулю. Согласно замечаниям \ref{remark:row_sum_zero} и \ref{remark:col_sum_zero} мы получаем конечную последовательность.
+
+Таким образом указанных ограничений явно не достаточно, чтобы предел последовательности существовал.
+
+
+В данной работе, мы будем использовать другое начальное условие: 
+\begin{equation}
+  \label{eq:constraint}
+  \mk[0]_{ij} > 0 \quad \text{для всех} \quad i,j \in \left\{ 1, 2, \ldots n \right\}
+\end{equation}
+— ограничение положительной определённости матрицы снимается.
+
+
+Отметим, что если разрешить $\mk[0]_{ij}$ быть нулями, то возможен пример когда предел последовательностей существует, но отличен от ожидаемого:
+\begin{displaymath}
+  \Mk[0] = \left(
+  \begin{array}{ccc}
+      2 & 1 & 0 \\
+      0 & 1 & 0 \\
+      0 & 1 & 2 \\
+  \end{array}
+  \right);
+\end{displaymath}
+\begin{displaymath}
+  \Mk \rightarrow \left(
+  \begin{array}{ccc}
+      0 & 0 & 0 \\
+      0 & 1 & 0 \\
+      0 & 0 & 0 \\
+  \end{array}
+  \right)
+  \quad \text{при} \quad k \rightarrow +\infty,
+\end{displaymath}
+\begin{displaymath}
+  \Tk \equiv \left(
+  \begin{array}{ccc}
+      \frac{2}{3} & 0 &           0 \\
+                0 & 1 &           0 \\
+                0 & 0 & \frac{2}{3} \\
+  \end{array}
+  \right).
+\end{displaymath}
+
+
+\section{Вспомогательные построения}
+
+Обозначим $\maxak = \max \{ \ak_i \},$ $\minak = \min \{ \ak_i \}.$
+
+\begin{lemma}
+  \label{lemma:constraint}
+  Для любого $i, j$ и $k$ верно: $\mk_{ij} > 0$ и $\ak_i > 0. $
+  \hfill$\square$
+\end{lemma}
+
+\begin{lemma}
+  \label{lemma:one}
+  Для любого $k$ верно: $\minak \leq 1 \leq \maxak$.
+  \hfill$\square$
+\end{lemma}
+
+\begin{lemma}
+  \label{lemma:ak_next}
+  Для любых $i \not= n - 1$ и $k$ верно:
+  \[ \ak[k + 1]_i = \frac{\sum_{j = 1}^n{\ak_j\mk_{ji}}}{\sum_{j = 1}^n{\mk_{ji}}}. \]
+\end{lemma}
+\begin{proof}
+  Распишем значение $\ak[k + 1]_i$ исходя из определения:
+  \[ \ak[k + 1]_i = \frac{\Abs{\Mk[k + 1]_{*i}}}{\Abs{\Mk[k + 1]_{i*}}} = 
+                    \frac{\Abs{(\Tk\Mk)_{*i}}}{\Abs{(\Tk\Mk)_{i*}}}.
+  \]
+  Распишем числитель:
+  \[ \Abs{(\Tk\Mk)_{*i}} = \sum_{j = 1}^n{\ak_j\mk_{ji}}. \]
+  Распишем знаменатель:
+  \begin{eqnarray*}
+    \Abs{(\Tk\Mk)_{i*}} & = & \sum_{j = 1}^n{\ak_i\mk_{ij}} = \ak_i \sum_{j = 1}^n{\mk_{ij}} = \\
+                        & = & \ak_i \Abs{\Mk_{i*}} = \frac{\Abs{\Mk_{*i}}}{\Abs{\Mk_{i*}}} \Abs{\Mk_{i*}} \\
+                        & = & \Abs{\Mk_{*i}} = \sum_{j = 1}^n{\mk_{ji}}. 
+  \end{eqnarray*}
+
+  Чтобы получить искомое утверждение, осталось подставить результаты в исходное уравнение.
+\end{proof}
+
+\begin{lemma}
+  \label{lemma:subsegment}
+  Для любого $k$ верно: $\minak \leq \minak[k + 1] \leq \maxak[k + 1] \leq \maxak[k]$.
+\end{lemma}
+\begin{proof}
+  Покажем, что для произвольного $i$ верно неравенство
+  \begin{equation}
+    \label{lemma:subsegment:eq:1}
+    \minak \leq \ak[k + 1]_i \leq \maxak.
+  \end{equation}
+
+  В случае $i = n - 1$ неравенство (\ref{lemma:subsegment:eq:1}) очевидно верно.
+
+  Пусть $i \not= n - 1$. Тогда по определению
+  \[ \minak \leq \ak_i \leq \maxak, \]
+  и следовательно (используя результаты лемм \ref{lemma:constraint} и \ref{lemma:ak_next})
+  \begin{gather*} 
+     \minak = \minak\frac{\sum_{j = 1}^n{\mk_{ji}}}{\sum_{j = 1}^n{\mk_{ji}}} = \frac{\sum_{j = 1}^n{\minak\mk_{ji}}}{\sum_{j = 1}^n{\mk_{ji}}} \leq \\
+     \leq \ak[k + 1]_i \leq \\
+     \leq \frac{\sum_{j = 1}^n{\maxak\mk_{ji}}}{\sum_{j = 1}^n{\mk_{ji}}} = \maxak\frac{\sum_{j = 1}^n{\mk_{ji}}}{\sum_{j = 1}^n{\mk_{ji}}} = \maxak.
+  \end{gather*}
+
+  Мы доказали неравенство (\ref{lemma:subsegment:eq:1}). Из него следует утверждение леммы.
+\end{proof}
+
+\begin{lemma}
+  \label{lemma:final}
+  Если $\minak = \minak[k + 1]$, то $\ak_i = 1,$ для всех $i \in \left\{ 1, 2, \ldots, n \right\}.$
+\end{lemma}
+\begin{proof}
+  Пусть утверждение леммы верно, и $i \not= n - 1$ такое, что
+  \[ \ak[k + 1]_i = \minak[k + 1] = \minak. \]
+  Согласно лемме \ref{lemma:ak_next}:
+  \[ \frac{\sum_{j = 1}^n{\ak_j\mk_{ji}}}{\sum_{j = 1}^n{\mk_{ji}}} = \ak[k + 1]_i = \minak = \frac{\sum_{j = 1}^n{\minak\mk_{ji}}}{\sum_{j = 1}^n{\mk_{ji}}}, \]
+  или
+  \[ \sum_{j = 1}^n{\ak_j\mk_{ji}} = \sum_{j = 1}^n{\minak\mk_{ji}}. \]
+
+  По определению мы имеем $\ak_j \geq \minak$, кроме того из леммы \ref{lemma:constraint} мы знаем, что $\mk_{ji} > 0$. Значит
+  \[ \minak = \ak_j \quad \text{для всех} \quad j \in \left\{ 1, 2, \ldots, n \right\} \]
+  и
+  \[ \minak = \maxak. \]
+
+  Из леммы \ref{lemma:one} следует, что $\minak = \maxak = 1$.
+\end{proof}
+
+
+\section{Теорема}
+
+\begin{theorem}
+  Если выполняется начальное условие (\ref{eq:constraint}), тогда последовательность матриц $\Tk$ поэлементно сходится к единичной матрице.
+  % при $k \rightarrow +\infty.$
+\end{theorem}
+\begin{proof}
+  Из лемм \ref{lemma:subsegment} и \ref{lemma:final} следует, что последовательность 
+  \[ \left\{ [ \minak, \maxak ] \right\} \]
+  образует систему вложенных отрезков с единственной общей точкой — $1$.
+%  Используя математический анализ, отсюда легко получаем, что
+  Отсюда легко получаем, что
+  $\ak_i \rightarrow 1$ для всех $i.$
+%  $\ak_i \rightarrow 1$ для любого $i \in \left\{ 1, 2, \ldots, n \right\}.$
+
+%  \[ \ak_i \rightarrow 1, \qquad \text{для всех $i \in \left\{ 1, 2, \ldots, n \right\}$} . \]
+%  По лемме о вложенных отрезка (стандартный курс математического анализа) очевидно получаем $\ak_i \rightarrow 1$ для всех $i.$
+\end{proof}
+
+\end{document}
