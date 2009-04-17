@@ -110,7 +110,7 @@ error-checking mechanism.
 
 using namespace std;
 
-int main(size_t argc, char * argv[]) {
+int main(int argc, char * argv[]) {
 	if( 1 == argc ) {
 		fprintf(stderr, "usage: %s file ...\n\n", argv[0]);
 		return -1;
@@ -146,7 +146,7 @@ int main(size_t argc, char * argv[]) {
 
 		fclose(file);
 		
-		printf("%08X\t%s\n", crcHash.Evaluate(), argv[i]);
+		printf("%08lX\t%s\n", crcHash.Evaluate(), argv[i]);
 	}
 
 	return ret;
