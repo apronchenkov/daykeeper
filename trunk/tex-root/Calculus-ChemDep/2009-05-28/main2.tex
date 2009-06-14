@@ -1,0 +1,144 @@
+% 2009-01-14
+% 2009-01-11
+% 2009-01-10
+
+\documentclass[10pt,a4paper]{scrartcl}
+
+%%
+% Пакет позволяющий определить, что используется: latex или pdflatex?
+%%
+\usepackage{ifpdf}
+
+%%
+% Пакеты AMS*
+%%
+\usepackage{amsfonts, amsmath, amsthm}
+
+%%
+% Определяем, используется ли XeTex?
+%%
+\ifx\XeTeXversion\undefined
+  %%
+  % Набор пакетов для работы с графическими файлами
+  %%
+  \ifpdf
+    \usepackage[pdftex]{graphicx}
+    \usepackage{cmap}
+  \else
+    \usepackage{graphicx}
+  \fi
+
+  \usepackage[utf8x]{inputenc} 
+
+\else
+  %%
+  % Набор пакетов для поддержки русского языка в XeLaTeX
+  %%
+  \usepackage[cm-default]{fontspec}
+  \usepackage{xunicode}
+  \usepackage{xecyr}
+
+  % Setting default fonts
+  \usepackage{unicode-math}
+  \setmainfont[Mapping=tex-text]{Cambria}
+  \setmathfont{Cambria Math}
+  
+  %\setmainfont{Times New Roman} 
+  %\setmainfont{Georgia}
+  %\setmainfont{Lucida Console}
+\fi
+
+%%
+% Дополнительные настройки
+%%
+%\usepackage{geometry} % пакет для установки полей
+%\geometry{top=.7cm} % отступ сверху
+%\geometry{bottom=1cm} % отступ снизу
+%\geometry{left=2cm} % отступ справа
+%\geometry{right=2cm} % отступ слева
+
+
+\usepackage[english,russian]{babel} 
+\usepackage{indentfirst}
+
+
+\newcommand{\exercize}[1]{\textbf{#1.}}
+\newcommand{\abs}[1]{\lvert{}#1{}\rvert}
+\newcommand{\HRule}{\rule{\linewidth}{0.1mm}}
+
+%%
+% Начало документа
+%%
+\begin{document}
+
+\HRule
+
+\section{Построение графиков функций по характерным точкам}
+
+Для построения графика функции $y = f(x)$ нужно выполнить следующие шаги.
+\begin{enumerate}
+  \item {Определить область существования этой функции и исследовать поведение функции в граничных точках последней.}
+  \item {Выяснить симметрию графика и периодичность.}
+  \item {Найти точки разрыва функции и промежутки непрерывности.}
+  \item {Определить нули функции и области постоянства знака.}
+  \item {Найти точки экстремума и выяснить промежутки возрастания и убывания функции.}
+  \item {Определить точки перегиба и установить промежутки вогнутости определённого знака графика функции.}
+  \item {Найти асимптоты в случае существования их.}
+  \item {Указать те или иные особенности графика.}
+\end{enumerate}
+
+В частных случая общая схема упрощается.
+
+\HRule
+
+\section{Построить графики следующих функций}
+
+\begin{eqnarray}
+  y & = & 3x - x^3. \\
+  y & = & (x + 1)(x - 2)^3. \\
+  y & = & \frac{2 - x^2}{1 + x^4} \text{(точки перегиба искать приближённо)}. \\
+  y & = & (x - 3) \sqrt{x}. \\
+  y & = & \sin{x} + \cos^3{x}. \\
+  y & = & (7 + 2 \cos{x})\sin{x}. \\
+  y & = & \sin{x} + \frac{1}{3}\sin{3 x}. \\
+  y & = & \cos{x} - \frac{1}{2}\cos{2 x}. \\
+  y & = & \sin^4{x} + \cos^4{x}. \\
+  y & = & \sin{x} \sin{3 x}. \\
+  y & = & \frac{e^x}{1 + x}.
+\end{eqnarray}
+
+
+\section{Найти производные следующих функций}
+
+\begin{eqnarray}
+  y & = & x + \sqrt{x} + \sqrt[3]{x}. \\
+  y & = & \frac{1}{x} + \frac{1}{\sqrt{x}} + \frac{1}{\sqrt[3]{x}}. \\
+  y & = & \arctg{\sqrt{\sqrt{x} - 1}}. \\
+  y & = & \sqrt{x + \sqrt{x + \sqrt{x}}}. \\
+  y & = & \sqrt[3]{1 + \sqrt[3]{1 + \sqrt[3]{x}}}. \\
+  y & = & \cos{2 x} - 2 \sin{x}. \\
+  y & = & \frac{\sin^2{x}}{\sin{x^3}}. \\
+  y & = & \frac{\cos{x}}{2 \sin^2{x}}. \\
+  y & = & \frac{1}{\cos^n{x}}. \\
+  y & = & \tg{\frac{x}{2}} - \ctg{\frac{x}{2}}. \\
+  y & = & e^x (1 + \ctg{\frac{x}{2}}). \\
+  y & = & e^x + e^{e^x} + e^{e e^x}.
+\end{eqnarray}
+
+\section{Найти следующие определённые интегралы}
+
+\begin{eqnarray}
+  & \int\limits_{0}^{2\pi} {\frac{dx}{2 + \cos{x}}}. & \\
+  & \int\limits_{0}^{100\pi} {\sqrt{1 - \cos{2 x} dx}}. & \\
+  & \int\limits_{0}^{2\pi} {x^2 \cos{x} dx}. & \\
+  & \int\limits_{0}^{2} {|1 - x| dx}. & \\
+  & \int\limits_{0}^{1} {x |x - \frac{1}{3}| dx}. & \\
+  & \int\limits_{1/e}^{e} {|\ln{x}| dx}. & \\
+  & \int\limits_{0}{\ln{2}} {\sqrt{e^x - 1} dx}. \\
+  & \int\limits_{0}^{\pi} {\frac{x \sin{x}}{1 + \cos^2{x}} dx}. & \\
+  & \int\limits_{0}^{\sqrt{3}} {x \arctg{x} dx}. & \\
+  & \int\limits_{-1}^{1} {\frac{x dx}{\sqrt{5 - 4x}}}. & \\
+  & \int\limits_{1}^{2} {\frac{dx}{x (x^2 + 1)}}. & \\
+\end{eqnarray}
+
+\end{document}
