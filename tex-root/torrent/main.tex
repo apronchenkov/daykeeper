@@ -142,7 +142,7 @@ There are ideally many end users for a single file.
 
     The {\it name} key maps to a string which is the suggested name to save the file (or directory) as. It is purely advisory.
 
-    {\it piece length} maps to the number of bytes in each piece the file is split into. For the purposes of transfer, files are split into fixed-size pieces which are all the same length except for possibly the last one which may be truncated. {\it piece length} is almost always a power of two, most commonly 2 18 = 256 K (BitTorrent prior to version 3.2 uses 2 20 = 1 M as default).
+    {\it piece length} maps to the number of bytes in each piece the file is split into. For the purposes of transfer, files are split into fixed-size pieces which are all the same length except for possibly the last one which may be truncated. {\it piece length} is almost always a power of two, most commonly $2^{18} = 256 K$ (BitTorrent prior to version 3.2 uses $2^{20} = 1 M$ as default).
 
     {\it pieces} maps to a string whose length is a multiple of 20. It is to be subdivided into strings of length 20, each of which is the SHA1 hash of the piece at the corresponding index.
 
@@ -235,7 +235,7 @@ That's it for handshaking, next comes an alternating stream of length prefixes a
 
 The 'have' message's payload is a single number, the index which that downloader just completed and checked the hash of.
 
-'request' messages contain an index, begin, and length. The last two are byte offsets. Length is generally a power of two unless it gets truncated by the end of the file. All current implementations use 2 15 , and close connections which request an amount greater than 2 17.
+'request' messages contain an index, begin, and length. The last two are byte offsets. Length is generally a power of two unless it gets truncated by the end of the file. All current implementations use $2^{15},$ and close connections which request an amount greater than $2^{17}.$
 
 'cancel' messages have the same payload as request messages. They are generally only sent towards the end of a download, during what's called 'endgame mode'. When a download is almost complete, there's a tendency for the last few pieces to all be downloaded off a single hosed modem line, taking a very long time. To make sure the last few pieces come in quickly, once requests for all pieces a given downloader doesn't have yet are currently pending, it sends requests for everything to everyone it's downloading from. To keep this from becoming horribly inefficient, it sends cancels to everyone else every time a piece arrives.
 
