@@ -1,0 +1,91 @@
+% 2009-01-11
+
+\documentclass[draft]{article}
+%%
+% Пакет позволяющий определить, что используется: latex или pdflatex?
+%%
+\usepackage{ifpdf}
+
+%%
+% Пакеты AMS\cdot
+%%
+\usepackage{amsfonts, amsmath, amsthm}
+
+%%
+% Определяем, используется ли XeTex?
+%%
+\ifx\XeTeXversion\undefined
+  %%
+  % Набор пакетов для работы с графическими файлами
+  %%
+  \ifpdf
+    \usepackage[pdftex]{graphicx}
+    \usepackage{cmap}
+  \else
+    \usepackage{graphicx}
+  \fi
+
+  \usepackage[utf8x]{inputenc} 
+
+\else
+  %%
+  % Набор пакетов для поддержки русского языка в XeLaTeX
+  %%
+  \usepackage[cm-default]{fontspec}
+  \usepackage{xunicode}
+  \usepackage{xecyr}
+
+  % Setting default fonts
+  \usepackage{unicode-math}
+  \setmainfont[Mapping=tex-text]{Cambria}
+  \setmathfont{Cambria Math}
+  
+  %\setmainfont{Times New Roman} 
+  %\setmainfont{Georgia}
+  %\setmainfont{Lucida Console}
+\fi
+
+%%
+% Дополнительные настройки
+%%
+\usepackage[english,russian]{babel} 
+\usepackage{indentfirst}
+
+\newtheorem{define}{Определение}
+\newtheorem{theorem}{Теорема}
+\newtheorem{lemma}{Лемма}
+\newtheorem{remark}{Замечание}
+
+\newcommand{\abs}[1]{\lvert{}#1{}\rvert}
+\newcommand{\Abs}[1]{\lVert{}#1{}\rVert}
+\newcommand{\ak}[1][k]{\alpha^{(#1)}}
+\newcommand{\minak}[1][k]{\underline{\alpha}^{(#1)}}
+\newcommand{\maxak}[1][k]{\overline{\alpha}^{(#1)}}
+\newcommand{\mk}[1][k]{m^{(#1)}}
+\newcommand{\Mk}[1][k]{M^{(#1)}}
+\newcommand{\tk}[1][k]{t^{(#1)}}
+\newcommand{\Tk}[1][k]{T^{(#1)}}
+
+%%
+% Начало документа
+%%
+\begin{document}
+
+{\em Оценка размера окна.}
+Рассмотрим устоявшуюся систему в который:
+\begin{itemize}
+  {\item все пакеты доставляются мгновенно;}
+  {\item каждый пакет имеет размер 1300;}
+  {\item каждый двадцатый пакет теряется.}
+\end{itemize}
+
+Пусть $w_{min}$ -- минимальный размер окна возникающий в устоявшейся системе. Тогда,
+\[ (w_{min} + \frac{1300 \cdot 1024}{w_{min}} \cdot 19) \cdot 0.78 = w_{min}. \]
+Отсюда мы можем выразить $w_{min} = 10723.$ Соответственно $w_{max}$ будет
+\[ w_{max} = w_{min} + \frac{1300 \cdot 1024}{w_{min}} \cdot 19 = 13082. \]
+Среднее теоретическое значение будет $w = 11902.$
+
+{\em Оценка пропускной сопособность.} Если теперь предположить, что $rtt = 0.3$, тогда, теоретически, средняя пропусная сособность будет:
+\[ b = \frac{w}{rtt} = 36068. \]
+
+\end{document}
